@@ -719,29 +719,21 @@ class CanvasEngine {
     ctx.fillRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8);
     ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 
-    // 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
+// 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
 const stickerX = W / 2 - 200;
 const stickerY = 870;
 const stickerW = 150;
 const stickerH = 75;
 
-await new Promise((resolve) => {
-  const stImg = new Image();
+const stImg = new Image();
+stImg.src = "/studio_sticker.png";
 
+await new Promise((resolve) => {
   stImg.onload = () => {
     ctx.save();
-
     ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
     ctx.shadowBlur = 8;
-
-    ctx.drawImage(
-      stImg,
-      stickerX,
-      stickerY,
-      stickerW,
-      stickerH
-    );
-
+    ctx.drawImage(stImg, stickerX, stickerY, stickerW, stickerH);
     ctx.restore();
     resolve();
   };
@@ -749,10 +741,10 @@ await new Promise((resolve) => {
   stImg.onerror = () => {
     resolve();
   };
-
-  stImg.src = "https://hh-goa2026.vercel.app/studio_sticker.png";
 });
 
+ctx.restore();
+}
   static drawProceduralBarcode(ctx, x, y, w, h) {
     ctx.save();
     ctx.fillStyle = "#FFFFFF";
