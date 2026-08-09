@@ -726,21 +726,32 @@ const stickerW = 150;
 const stickerH = 75;
 
 const stImg = new Image();
-stImg.src = "/studio_sticker.png";
 
 await new Promise((resolve) => {
   stImg.onload = () => {
     ctx.save();
-    ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
-    ctx.shadowBlur = 8;
-    ctx.drawImage(stImg, stickerX, stickerY, stickerW, stickerH);
+
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "source-over";
+
+    ctx.drawImage(
+      stImg,
+      stickerX,
+      stickerY,
+      stickerW,
+      stickerH
+    );
+
     ctx.restore();
     resolve();
   };
 
   stImg.onerror = () => {
+    console.error("Sticker loading failed:", stImg.src);
     resolve();
   };
+
+  stImg.src = "/studio_sticker.png?v=2";
 });
 
 ctx.restore();
