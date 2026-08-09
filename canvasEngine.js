@@ -719,7 +719,7 @@ class CanvasEngine {
     ctx.fillRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8);
     ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 
-   // 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
+ // 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
 const stickerX = W / 2 - 200;
 const stickerY = 870;
 const stickerW = 150;
@@ -738,26 +738,11 @@ await new Promise((resolve) => {
   stImg.onerror = () => {
     resolve();
   };
-  stImg.src = window.location.origin + "/studio_sticker.png";
+  stImg.src = "/studio_sticker.png";
 });
 
 ctx.restore();
-  static drawProceduralBarcode(ctx, x, y, w, h) {
-    ctx.save();
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fillRect(x, y, w, h);
-
-    ctx.fillStyle = "#000000";
-    let curX = x + 10;
-    const barWidths = [2, 1, 3, 1, 2, 4, 1, 2, 1, 3, 2, 1, 4, 1, 2, 1, 3, 2, 1, 4];
-    
-    barWidths.forEach(bw => {
-      ctx.fillRect(curX, y + 4, bw, h - 8);
-      curX += bw + 2;
-    });
-
-    ctx.restore();
-  }
+}
 
   static drawOfficialFooterLinks(ctx, W, H) {
     ctx.save();
