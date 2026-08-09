@@ -5,23 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FrameInGoa - Hacker Goa House ID Generator</title>
   <meta name="description" content="Generate official branded ID Cards for Hacker Goa House 2026. Instant PNG export, phone masking, and share to X with #FrameInGoa." />
-  
+
   <!-- PWA Manifest & Icons -->
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#004D2E" />
-  
+
   <!-- Google Fonts: Syne, Outfit, Plus Jakarta Sans, Cinzel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  
+
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  
+
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body data-theme="emerald-tropic">
+
   <!-- Toast Notification Container -->
   <div id="toast-container"></div>
 
@@ -33,19 +35,19 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" onerror="console.warn('confetti CDN load skipped')"></script>
 
   <!-- Application Architecture Utilities & Config -->
-  <script src="js/utils/heicConverter.js"></script>
-  <script src="js/config.js"></script>
-  <script src="js/utils/qrCodeGenerator.js"></script>
-  <script src="js/engines/faceDetectionEngine.js"></script>
-  <script src="js/engines/ruleEngine.js"></script>
-  <script src="js/engines/canvasEngine.js"></script>
-  
+  <script src="heicConverter.js"></script>
+  <script src="config.js"></script>
+  <script src="qrCodeGenerator.js"></script>
+  <script src="faceDetectionEngine.js"></script>
+  <script src="ruleEngine.js"></script>
+  <script src="canvasEngine.js"></script>
+
   <!-- View Controllers -->
-  <script src="js/views/landingView.js"></script>
-  <script src="js/views/generatorView.js"></script>
-  
+  <script src="landingView.js"></script>
+  <script src="generatorView.js"></script>
+
   <!-- Main Router & App Launcher -->
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
 
   <!-- Service Worker PWA Registration -->
   <script>
@@ -55,5 +57,6 @@
       });
     }
   </script>
+
 </body>
 </html>
