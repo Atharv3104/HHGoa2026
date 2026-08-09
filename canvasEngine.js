@@ -42,7 +42,7 @@ class CanvasEngine {
         this.drawGoaBackgroundAccents(ctx, W, H);
         resolve();
       };
-      bgImg.src = "assets/id_card_bg.jpg";
+      bgImg.src = "id_card_bg.jpg";
     });
 
     // 2. Outer Decorative Edge Borders (Hot Pink Outer + Sunny Yellow Inner)
@@ -103,7 +103,7 @@ class CanvasEngine {
         this.drawGoaBackgroundAccents(ctx, W, H);
         resolve();
       };
-      bgImg.src = "assets/id_card_bg.jpg";
+      bgImg.src = "id_card_bg.jpg";
     });
 
     // 2. Outer Decorative Edge Borders
@@ -738,7 +738,7 @@ class CanvasEngine {
       stImg.onerror = () => {
         resolve();
       };
-      stImg.src = "assets/studio_sticker.png";
+      stImg.src = "studio_sticker.png";
     });
 
     ctx.restore();
