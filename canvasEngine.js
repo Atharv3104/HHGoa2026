@@ -719,7 +719,7 @@ class CanvasEngine {
     ctx.fillRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8);
     ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 
-   // 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
+    // 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
 const stickerX = W / 2 - 200;
 const stickerY = 870;
 const stickerW = 150;
@@ -731,8 +731,8 @@ await new Promise((resolve) => {
   stImg.onload = () => {
     ctx.save();
 
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = "source-over";
+    ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+    ctx.shadowBlur = 8;
 
     ctx.drawImage(
       stImg,
@@ -747,14 +747,33 @@ await new Promise((resolve) => {
   };
 
   stImg.onerror = () => {
-    console.error("STUDIO STICKER NOT LOADED:", stImg.src);
     resolve();
   };
 
   stImg.src = "https://hh-goa2026.vercel.app/studio_sticker.png";
 });
 
-ctx.restore();
+  static drawProceduralBarcode(ctx, x, y, w, h) {
+    ctx.save();
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(x, y, w, h);
+
+    ctx.fillStyle = "#000000";
+    let curX = x + 10;
+    const barWidths = [2, 1, 3, 1, 2, 4, 1, 2, 1, 3, 2, 1, 4, 1, 2, 1, 3, 2, 1, 4];
+    
+    barWidths.forEach(bw => {
+      ctx.fillRect(curX, y + 4, bw, h - 8);
+      curX += bw + 2;
+    });
+
+    ctx.restore();
+  }
+
+  static drawOfficialFooterLinks(ctx, W, H) {
+    ctx.save();
+
+    const footerY = H - 40;
 
     // Background Footer Bar
     ctx.fillStyle = "rgba(0, 43, 26, 0.95)";
