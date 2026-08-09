@@ -1,0 +1,21 @@
+{
+  "name": "FrameInGoa - HH Goa 2026 Builder ID",
+  "short_name": "FrameInGoa",
+  "description": "Official Hacker House Goa 2026 Builder ID & Squad Poster Generator",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b0714",
+  "theme_color": "#ff6b35",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=192&auto=format&fit=crop&q=80",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=512&auto=format&fit=crop&q=80",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
