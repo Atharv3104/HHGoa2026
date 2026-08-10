@@ -782,7 +782,10 @@ await new Promise(async (resolve) => {
     resolve();
   }
 });
-
+    
+ctx.restore(); 
+  }
+  
   static drawProceduralBarcode(ctx, x, y, w, h) {
     ctx.save();
     ctx.fillStyle = "#FFFFFF";
