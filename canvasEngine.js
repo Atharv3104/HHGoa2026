@@ -753,7 +753,7 @@ try {
   );
 
   ctx.restore();
-
+}
   stickerBitmap.close();
 
 } catch (error) {
