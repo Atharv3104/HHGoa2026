@@ -719,73 +719,31 @@ class CanvasEngine {
     ctx.fillRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8);
     ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 
-  // 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
-const stickerX = W / 2 - 200;
-const stickerY = 870;
-const stickerW = 150;
-const stickerH = 75;
+// 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
+    const stickerX = W / 2 - 200;
+    const stickerY = 870;
+    const stickerW = 150;
+    const stickerH = 75;
 
-await new Promise(async (resolve) => {
-  try {
-    const response = await fetch(
-      "/studio_sticker.png?v=" + Date.now(),
-      {
-        cache: "no-store"
-      }
-    );
+    await new Promise((resolve) => {
+      const stImg = new Image();
+      stImg.onload = () => {
+        ctx.save();
+        ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+        ctx.shadowBlur = 8;
+        ctx.drawImage(stImg, stickerX, stickerY, stickerW, stickerH);
+        ctx.restore();
+        resolve();
+      };
+      stImg.onerror = () => {
+        resolve();
+      };
+      stImg.src = "studio_sticker.png";
+    });
 
-    if (!response.ok) {
-      console.error(
-        "STUDIO STICKER HTTP ERROR:",
-        response.status,
-        response.statusText
-      );
-      resolve();
-      return;
-    }
-
-    const blob = await response.blob();
-    const imageUrl = URL.createObjectURL(blob);
-
-    const stImg = new Image();
-
-    stImg.onload = () => {
-      ctx.save();
-
-      ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
-      ctx.shadowBlur = 8;
-
-      ctx.drawImage(
-        stImg,
-        stickerX,
-        stickerY,
-        stickerW,
-        stickerH
-      );
-
-      ctx.restore();
-
-      URL.revokeObjectURL(imageUrl);
-      resolve();
-    };
-
-    stImg.onerror = () => {
-      console.error("STUDIO STICKER IMAGE LOAD FAILED");
-      URL.revokeObjectURL(imageUrl);
-      resolve();
-    };
-
-    stImg.src = imageUrl;
-
-  } catch (error) {
-    console.error("STUDIO STICKER ERROR:", error);
-    resolve();
+    ctx.restore();
   }
-});
-    
-ctx.restore(); 
-  }
-  
+
   static drawProceduralBarcode(ctx, x, y, w, h) {
     ctx.save();
     ctx.fillStyle = "#FFFFFF";
