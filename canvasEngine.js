@@ -738,7 +738,7 @@ class CanvasEngine {
       stImg.onerror = () => {
         resolve();
       };
-      stImg.src = "studio_sticker.png";
+      stImg.src = "/studio_sticker.png";
     });
 
     ctx.restore();
