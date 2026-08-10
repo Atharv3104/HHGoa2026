@@ -719,40 +719,31 @@ class CanvasEngine {
     ctx.fillRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8);
     ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 
-// 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
-const stickerX = W / 2 - 200;
-const stickerY = 870;
-const stickerW = 150;
-const stickerH = 75;
+   // 4. "2:47PM STUDIO" Graphic Sticker Image at Left Side of QR Code
+    const stickerX = W / 2 - 200;
+    const stickerY = 870;
+    const stickerW = 150;
+    const stickerH = 75;
 
-const stImg = new Image();
-
-await new Promise((resolve) => {
-  stImg.onload = () => {
-    ctx.save();
-
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = "source-over";
-
-    ctx.drawImage(
-      stImg,
-      stickerX,
-      stickerY,
-      stickerW,
-      stickerH
-    );
+    await new Promise((resolve) => {
+      const stImg = new Image();
+      stImg.onload = () => {
+        ctx.save();
+        ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+        ctx.shadowBlur = 8;
+        ctx.drawImage(stImg, stickerX, stickerY, stickerW, stickerH);
+        ctx.restore();
+        resolve();
+      };
+      stImg.onerror = () => {
+        resolve();
+      };
+      stImg.src = "assets/studio_sticker.png";
+    });
 
     ctx.restore();
-    resolve();
-  };
+  }
 
-  stImg.onerror = () => {
-    console.error("Sticker loading failed:", stImg.src);
-    resolve();
-  };
-
-  stImg.src = "/studio_sticker.png?v=2";
-});
   static drawProceduralBarcode(ctx, x, y, w, h) {
     ctx.save();
     ctx.fillStyle = "#FFFFFF";
@@ -774,7 +765,6 @@ await new Promise((resolve) => {
     ctx.save();
 
     const footerY = H - 40;
-
     // Background Footer Bar
     ctx.fillStyle = "rgba(0, 43, 26, 0.95)";
     ctx.fillRect(20, footerY - 14, W - 40, 34);
