@@ -725,36 +725,39 @@ const stickerY = 870;
 const stickerW = 150;
 const stickerH = 75;
 
-const stImg = new Image();
+try {
+  const response = await fetch("/studio_sticker.png", {
+    cache: "no-store"
+  });
 
-await new Promise((resolve) => {
-  stImg.onload = () => {
-    ctx.save();
+  if (!response.ok) {
+    throw new Error(`Sticker HTTP error: ${response.status}`);
+  }
 
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = "source-over";
+  const stickerBlob = await response.blob();
+  const stickerBitmap = await createImageBitmap(stickerBlob);
 
-    ctx.drawImage(
-      stImg,
-      stickerX,
-      stickerY,
-      stickerW,
-      stickerH
-    );
+  ctx.save();
 
-    ctx.restore();
-    resolve();
-  };
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = "source-over";
+  ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+  ctx.shadowBlur = 8;
 
-  stImg.onerror = () => {
-    console.error("Sticker loading failed:", stImg.src);
-    resolve();
-  };
+  ctx.drawImage(
+    stickerBitmap,
+    stickerX,
+    stickerY,
+    stickerW,
+    stickerH
+  );
 
-  stImg.src = "/studio_sticker.png?v=2";
-});
+  ctx.restore();
 
-ctx.restore();
+  stickerBitmap.close();
+
+} catch (error) {
+  console.error("STUDIO STICKER ERROR:", error);
 }
   static drawProceduralBarcode(ctx, x, y, w, h) {
     ctx.save();
