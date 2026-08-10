@@ -2,7 +2,8 @@
  * FrameInGoa - Service Worker for PWA Offline Support & Vercel Compatibility
  */
 
-const CACHE_NAME = 'frameingoa-v2';
+const CACHE_NAME = 'frameingoa-v3';
+
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -16,7 +17,8 @@ const ASSETS_TO_CACHE = [
   './js/views/landingView.js',
   './js/views/generatorView.js',
   './js/app.js',
-  './manifest.json'
+  './manifest.json',
+  './studio_sticker.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -24,7 +26,9 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return Promise.allSettled(
-        ASSETS_TO_CACHE.map(url => cache.add(url).catch(e => console.log('SW cache skip:', url)))
+        ASSETS_TO_CACHE.map(url =>
+          cache.add(url).catch(e => console.log('SW cache skip:', url))
+        )
       );
     })
   );
